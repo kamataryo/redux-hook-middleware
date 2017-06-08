@@ -1,0 +1,48 @@
+{
+  "name": "redux-hook-middleware",
+  "version": "0.0.0",
+  "description": "Middleware to provide easy hooks before and after action dispatched",
+  "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "babel ./src --out-dir ./dist --source-maps true",
+    "test": "NODE_ENV=test NODE_PATH=src:test mocha",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "lint": "eslint --cache --ext=jsx --ext=js .",
+    "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
+    "deploy_keygen": "ssh-keygen -t rsa -b 4096 -C \"$(git config user.email)\" -f ./.travis_rsa -N ''",
+    "encrypt_deploy_key": "travis encrypt-file ./.travis_rsa --add",
+    "preversion": "npm run lint && npm test",
+    "postversion": "git push origin master && git push origin $(git describe --abbrev=0 --tags)"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.1.0",
+    "babel-plugin-istanbul": "^4.1.4",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-register": "^6.18.0",
+    "chai": "^4.0.2",
+    "eslint": "^3.15.0",
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.2.0",
+    "nyc": "^11.0.2",
+    "redux": "^3.6.0"
+  },
+  "nyc": {
+    "include": [
+      "src/*.js"
+    ],
+    "require": [
+      "babel-register"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "hook"
+  ]
+}

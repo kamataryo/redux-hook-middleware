@@ -1,0 +1,39 @@
+sudo: false
+
+language: node_js
+
+node_js:
+- '7'
+
+env:
+  global:
+  - GH_REF: kamataryo/redux-hook-middleware
+
+cache:
+  yarn: true
+  directories:
+  - "~/.cache/yarn"
+
+before_script:
+- npm run build
+- yarn global add codecov
+- yarn global add npm-check-updates
+
+script:
+- npm run lint
+- npm run coverage >/dev/null 2>&1
+- codecov
+
+after_success:
+- openssl aes-256-cbc -K $encrypted_04592acae1fe_key -iv $encrypted_04592acae1fe_iv -in .travis_rsa.enc -out ./.travis_rsa -d
+- mv ./.travis_rsa $HOME/.ssh/id_rsa && chmod 600 $HOME/.ssh/id_rsa
+- "./.bin/travis-cron-upgrade.sh"
+
+deploy:
+  provider: npm
+  email: kamataryo@users.noreply.github.com
+  on:
+    tags: true
+  skip_cleanup: true
+  api_key:
+    secure: C6eXYWpqlZSSWG81ImlM0WCTkIPS6UKgYEzZQwn7sbki0ixhThtl1MK0HUcdPi13Rjp7ugOvYQw3vNOcRa8s2SMCUtInPvcfsCJfujnjLlenBa7XxuDC4GK/+AH3f9Mh8JRT/iCAjdJynqw0wT4PqIXJglV7fS0oI6msKFT6qxxfJ97trWa/IjcTmzpt9jxExoXbttpqtDtI32hyJZvg8gRcB9bQc9lpTCEYMotpM9y1DNloiKaajsIPxssin+8/H2GvgUi8wMl/kkFvnUIOCv4tpKJqfVwi/GPBLm2UNI33gJQ2Np/BytxPVBZETmt89Yfcf9IygCRC9gpvhwQwQ53w0NAY70toGh2OhMXUECC3GGLNwzXuwzI5PwmADyfqACUnf7UCwjI7lKWIMgFqNQIrfSpmGqOT8Q2S4g7fzbPfufoq3DXABWykgAomSiQpRsdtn50kmbEzSHJWHKv5OViQ7EpgW0c4SdMaWv+X+LjsFs730dQEMuJmKqSehyccjbc2hXU4Ysumnn/ventKvL66gocW6bsqRVHr7YIbxqQyrZpX+y/pjtNxgQC9F5o5URkUn2lfLT/kOrDgIb0XLSvLcE+PE9SvvMVFNpPm0WysBcwLyB5Ojsn/CiJhiuw+57zYAKoy9sSOcYl8w88B1Xij/qR363Y4Tj22ec9ZLxY=
