@@ -1,6 +1,6 @@
 {
   "name": "redux-hook-middleware",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A Redux middleware to provide easy hooks on pre/post dispatch.",
   "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
   "main": "./dist/index.js",
