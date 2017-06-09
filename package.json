@@ -50,5 +50,14 @@
     "middleware",
     "dispatch",
     "hook"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamataryo/redux-hook-middleware.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kamataryo/redux-hook-middleware/issues"
+  },
+  "homepage": "https://github.com/kamataryo/redux-hook-middleware#readme"
 }

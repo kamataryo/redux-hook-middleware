@@ -61,6 +61,14 @@ unregister the hook.
 
 unregister all the hooks registered.
 
+## development
+
+```shell
+$ git clone https://github.com/kamataryo/redux-hook-middleware.git
+$ cd redux-hook-middleware
+$ npm test
+```
+
 ## TODOs
 
-- This middleware is a singleton. A factory is needed.
+- This middleware is a singleton. A factory is needed in case the dependee has several store.
