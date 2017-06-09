@@ -4,7 +4,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/eocea8d71kqcmrim?svg=true)](https://ci.appveyor.com/project/KamataRyo55333/redux-hook-middleware)
 [![codecov](https://codecov.io/gh/kamataryo/redux-hook-middleware/branch/master/graph/badge.svg)](https://codecov.io/gh/kamataryo/redux-hook-middleware)
 
-[![npm (scoped)](https://img.shields.io/npm/v/redux-hook-middleware.svg)](https://www.npmjs.com/package/kamataryo/redux-hook-middleware)
+[![npm (scoped)](https://img.shields.io/npm/v/redux-hook-middleware.svg)](https://www.npmjs.com/package/redux-hook-middleware)
 [![downloads](https://img.shields.io/npm/dt/redux-hook-middleware.svg)](https://www.npmjs.com/package/redux-hook-middleware)
 
 [![Dependency Status](https://img.shields.io/david/kamataryo/redux-hook-middleware.svg?style=flat)](https://david-dm.org/kamataryo/redux-hook-middleware)
@@ -12,7 +12,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-This is a Redux middleware to provide easy hooks pre/post store dispatched.
+A Redux middleware to provide easy hooks on pre/post dispatch.
 
 ## install
 
