@@ -6,7 +6,7 @@
   "main": "./dist/index.js",
   "scripts": {
     "build": "babel ./src --out-dir ./dist --source-maps true",
-    "test": "NODE_ENV=test NODE_PATH=src:test mocha",
+    "test": "test mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint --cache --ext=jsx --ext=js .",
     "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
