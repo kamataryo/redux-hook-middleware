@@ -41,7 +41,7 @@ registerPrehook('log', (store, action) => {
 store.dispatch({ type: 'log' }) // 'prehooked!'
 ```
 
-## API
+## APIs
 
 ### `registerPrehook(type<string>, hook<function>)<symbol>`
 
@@ -53,14 +53,14 @@ returns uniq id for the hook.
 register a hook for later middleware chain.
 returns uniq id for the hook.
 
-### `unregisterHook(id:<symbol>)`
+### `unregisterHook(id:<symbol>)<void>`
 
 unregister the hook.
 
-### `clearHooks()`
+### `clearHooks()<void>`
 
 unregister all the hooks registered.
 
 ## TODOs
 
-- This middleware is a singleton. Factory is needed.
+- This middleware is a singleton. A factory is needed.
