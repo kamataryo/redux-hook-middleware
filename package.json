@@ -42,8 +42,9 @@
     "instrument": false
   },
   "keywords": [
-    "react",
     "redux",
+    "middleware",
+    "dispatch",
     "hook"
   ]
 }
