@@ -15,7 +15,7 @@
     "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
     "deploy_keygen": "ssh-keygen -t rsa -b 4096 -C \"$(git config user.email)\" -f ./.travis_rsa -N ''",
     "encrypt_deploy_key": "travis encrypt-file ./.travis_rsa --add",
-    "preversion": "npm run lint && npm test && git pull --tags",
+    "preversion": "npm run lint && npm test && git pull fetch",
     "postversion": "git push origin master && git push origin $(git describe --abbrev=0 --tags)"
   },
   "devDependencies": {
