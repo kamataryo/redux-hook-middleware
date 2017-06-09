@@ -56,7 +56,7 @@ describe('middleware', () => {
     expect(hookMiddleware(store)(next)(action)).is.not.a('function')
   })
 
-  it('execute each hooks', () => {
+  it('execute each hooks in order of [pre], next, [post]', () => {
     const store = {}
     // eslint-disable-next-line require-jsdoc
     const next = sinon.spy()

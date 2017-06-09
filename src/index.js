@@ -79,13 +79,12 @@ export const clearHooks = () => {
  * @return {void}
  */
 export default store => next => action => {
-
   /**
    * [getTheHooksAt description]
    * @param  {'pre'|'post'}     position determine pre or post
    * @return {array<function>}           hooks
    */
-  const getTheHooksAt = position => hooks[action.type] ? (
+  const getTheHooksAt = position => action && hooks[action.type] ? (
     hooks[action.type]
       .filter(x => x.position === position)
       .map(x => x.hook)

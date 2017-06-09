@@ -3,3 +3,4 @@
 --reporter dot
 
 ./test/unit/**/*.test.js
+./test/e2e/**/*.test.js
