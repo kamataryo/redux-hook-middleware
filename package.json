@@ -1,6 +1,6 @@
 {
   "name": "redux-hook-middleware",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Middleware to provide easy hooks before and after action dispatched",
   "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
   "main": "./dist/index.js",
