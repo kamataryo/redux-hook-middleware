@@ -12,7 +12,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Middleware to hook store dispatch
+This is a Redux middleware to provide easy hooks pre/post store dispatched.
 
 ## install
 
@@ -32,9 +32,11 @@ const reducer = (state = initialState, action) => { /* reducer function logics *
 const middlewares = [hookMiddleware]
 const store = createStore(reducer, initialState, applyMiddleware(...middlewares))
 
-// redux logics
+// middleware logic
 registerPrehook('log', (store, action) => {
   console.log('prehooked!')
+  store.dispatch({ type: 'pre action' })
+  // or do anything
 })
 store.dispatch({ type: 'log' }) // 'prehooked!'
 ```
@@ -61,4 +63,4 @@ unregister all the hooks registered.
 
 ## TODOs
 
-- This middleware is a singleton. Instance generator should be needed.
+- This middleware is a singleton. Factory is needed.

@@ -1,12 +1,15 @@
 {
   "name": "redux-hook-middleware",
   "version": "0.0.2",
-  "description": "Middleware to provide easy hooks before and after action dispatched",
+  "description": "This is a Redux middleware to provide easy hooks pre/post store dispatched.",
   "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
   "main": "./dist/index.js",
+  "files": [
+    "./dist"
+  ],
   "scripts": {
     "build": "babel ./src --out-dir ./dist --source-maps true",
-    "test": "test mocha",
+    "test": "mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint --cache --ext=jsx --ext=js .",
     "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
