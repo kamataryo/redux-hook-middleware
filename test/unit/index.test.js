@@ -41,6 +41,10 @@ describe('registration functions', () => {
     expect(hooks['have dinner'][0].hook()).to.equal('have digestif')
     clearHooks()
   })
+
+  it('should fail with invalid arguments', () => {
+    expect(registerHook(undefined, undefined, undefined)).to.be.false
+  })
 })
 
 describe('middleware', () => {
