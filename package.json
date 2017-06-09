@@ -5,7 +5,7 @@
   "author": "kamataryo <mugil.cephalus+github.com@gmail.com>",
   "main": "./dist/index.js",
   "files": [
-    "./dist"
+    "dist"
   ],
   "scripts": {
     "build": "babel ./src --out-dir ./dist --source-maps true",
