@@ -43,7 +43,9 @@ describe('registration functions', () => {
   })
 
   it('should fail with invalid arguments', () => {
-    expect(registerHook(undefined, undefined, undefined)).to.be.false
+    expect(registerHook(undefined)).to.be.false
+    expect(registerHook('pre', undefined)).to.be.false
+    expect(registerHook('pre', 'type', undefined)).to.be.false
   })
 })
 

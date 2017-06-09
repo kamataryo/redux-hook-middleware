@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "babel ./src --out-dir ./dist --source-maps true",
-    "test": "mocha",
+    "test": "cross-env NODE_ENV=test mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint --cache --ext=jsx --ext=js .",
     "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
@@ -27,6 +27,7 @@
     "babel-preset-env": "^1.5.2",
     "babel-register": "^6.18.0",
     "chai": "^4.0.2",
+    "cross-env": "^5.0.1",
     "eslint": "^3.15.0",
     "eslint-plugin-import": "^2.2.0",
     "mocha": "^3.2.0",

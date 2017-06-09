@@ -10,13 +10,13 @@ export const hooks = {}
  * @return {false|symbol}          return hook id or false when failed
  */
 export const registerHook = (position, type, hook) => {
-  if (typeof hook !== 'function') {
+  if (typeof position !== 'string') {
     return false
   }
   if (typeof type !== 'string') {
     return false
   }
-  if (typeof position !== 'string') {
+  if (typeof hook !== 'function') {
     return false
   }
 
