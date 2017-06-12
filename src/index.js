@@ -86,8 +86,8 @@ export default store => next => action => {
    */
   const getTheHooksAt = position => action && hooks[action.type] ? (
     hooks[action.type]
-      .filter(x => x.position === position)
-      .map(x => x.hook)
+    .filter(x => x.position === position)
+    .map(x => x.hook)
   ) : []
   const prehooks  = getTheHooksAt('pre')
   const posthooks =  getTheHooksAt('post')
