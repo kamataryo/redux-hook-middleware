@@ -76,12 +76,50 @@ describe('middleware', () => {
     registerPrehook('type', pre2)
     registerPosthook('type', post1)
     registerPosthook('type', post2)
-    hookMiddleware(store)(next)(action)
 
-    expect(pre1.calledBefore(next)).to.be.true
-    expect(pre2.calledBefore(next)).to.be.true
-    expect(post1.calledAfter(next)).to.be.true
-    expect(post2.calledAfter(next)).to.be.true
+    const result = hookMiddleware(store)(next)(action)
+
+    result.then(() => {
+      expect(pre1.calledBefore(next)).to.be.true
+      expect(pre2.calledBefore(next)).to.be.true
+      expect(post1.calledAfter(next)).to.be.true
+      expect(post2.calledAfter(next)).to.be.true
+    })
+
+  })
+  it('execute each hooks in order of [pre], next, [post] for action that returns promise', done => {
+    const store = {}
+    const promiseSpy = sinon.spy()
+
+    // eslint-disable-next-line require-jsdoc
+    const next = sinon.stub().callsFake(() => (
+      Promise.resolve().then(promiseSpy)
+    ))
+
+    const action = { type: 'PROMISE' }
+
+    const pre1 = sinon.spy()
+    const pre2 = sinon.spy()
+    const post1 = sinon.spy()
+    const post2 = sinon.spy()
+    registerPrehook('PROMISE', pre1)
+    registerPrehook('PROMISE', pre2)
+    registerPosthook('PROMISE', post1)
+    registerPosthook('PROMISE', post2)
+
+    const result = hookMiddleware(store)(next)(action)
+
+    result.then(() => {
+      expect(pre1.calledBefore(next)).to.be.true
+      expect(pre2.calledBefore(next)).to.be.true
+      expect(promiseSpy.calledAfter(pre1)).to.be.true
+      expect(promiseSpy.calledAfter(pre2)).to.be.true
+      expect(promiseSpy.calledBefore(post1)).to.be.true
+      expect(promiseSpy.calledBefore(post2)).to.be.true
+      expect(post1.calledAfter(next)).to.be.true
+      expect(post2.calledAfter(next)).to.be.true
+      done()
+    })
 
   })
 })
