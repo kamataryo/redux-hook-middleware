@@ -1,7 +1,7 @@
 # redux-hook-middleware
 
 [![Build Status](https://travis-ci.org/kamataryo/redux-hook-middleware.svg?branch=master)](https://travis-ci.org/kamataryo/redux-hook-middleware)
-[![Build status](https://ci.appveyor.com/api/projects/status/eocea8d71kqcmrim?svg=true)](https://ci.appveyor.com/project/KamataRyo55333/redux-hook-middleware)
+[![Build status](https://ci.appveyor.com/api/projects/status/eocea8d71kqcmrim/branch/master?svg=true)](https://ci.appveyor.com/project/KamataRyo55333/redux-hook-middleware)
 [![codecov](https://codecov.io/gh/kamataryo/redux-hook-middleware/branch/master/graph/badge.svg)](https://codecov.io/gh/kamataryo/redux-hook-middleware)
 [![runkit](https://img.shields.io/badge/RunKit-Try%20Now%20%E2%96%B6%EF%B8%8F-green.svg)](https://runkit.com/593b1972dbdedb001293ebfe/593b1972dbdedb001293ebff)
 
@@ -35,10 +35,16 @@ const store = createStore(reducer, initialState, applyMiddleware(...middlewares)
 // middleware logic
 registerPrehook('log', (store, action) => {
   console.log('prehooked!')
+  // you can also dispatch other actions
   store.dispatch({ type: 'pre action' })
-  // or do anything
+  // or do anything inside callback
 })
-store.dispatch({ type: 'log' }) // 'prehooked!'
+
+// how does it works
+store.dispatch({ type: 'log' })
+  .then(() => console.log('dispatched and then...'))
+  // 'prehooked!'
+  // 'prehooked!'
 ```
 
 ## APIs

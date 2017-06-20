@@ -4,6 +4,7 @@
   "description": "This is a demonstration for redux-hook-middleware",
   "main": "index.html",
   "scripts": {
+    "start": "webpack-dev-server  --progress --colors --hot --inline --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
