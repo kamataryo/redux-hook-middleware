@@ -93,6 +93,11 @@ export default store => next => action => {
   const posthooks =  getTheHooksAt('post')
 
   prehooks.forEach(hook => hook(store, action))
-  next(action)
-  posthooks.forEach(hook => hook(store, action))
+
+  const result = next(action)
+
+  return Promise.resolve(result)
+    .then(() => {
+      posthooks.forEach(hook => hook(store, action))
+    })
 }

@@ -28,8 +28,10 @@ const reducer = (state = { case: '' }, action) => {
  */
 const createSpyMiddleware = (preSpy, postSpy) => store => next => action => {
   preSpy(store.getState())
-  next(action)
-  postSpy(store.getState())
+  const result = next(action)
+  return Promise.resolve(result).then(() => {
+    postSpy(store.getState())
+  })
 }
 
 const prevPreSpy = sinon.spy()
@@ -61,13 +63,12 @@ describe('e2e test with redux API', () => {
     const postSpy = sinon.spy()
     registerPrehook('typeA', preSpy)
     registerPosthook('typeA', postSpy)
-    store.dispatch({ type: 'typeA' })
-
-    expect(prevPreSpy.calledBefore(preSpy)).to.be.true
-    expect(preSpy.calledBefore(nextPreSpy)).to.be.true
-    expect(nextPreSpy.calledBefore(nextPostSpy)).to.be.true
-    expect(nextPostSpy.calledBefore(postSpy)).to.be.true
-    expect(postSpy.calledBefore(prevPostSpy)).to.be.true
-
+    store.dispatch({ type: 'typeA' }).then(() => {
+      expect(prevPreSpy.calledBefore(preSpy)).to.be.true
+      expect(preSpy.calledBefore(nextPreSpy)).to.be.true
+      expect(nextPreSpy.calledBefore(nextPostSpy)).to.be.true
+      expect(nextPostSpy.calledBefore(postSpy)).to.be.true
+      expect(postSpy.calledBefore(prevPostSpy)).to.be.true
+    })
   })
 })
