@@ -52,7 +52,28 @@ const store = createStore(
 )
 
 describe('e2e test with redux API', () => {
-  it('should hook', () => {
+
+  it.only('should hook', () => {
+
+    // onion struture
+    // prevPreSpy↓                             prevPostSpy
+    //         preSpy↓                     postSpy↑
+    //             nextPreSpy  →  nextPostSpy↑
+
+    const preSpy  = sinon.spy()
+    const postSpy = sinon.spy()
+    registerPrehook('typeA', preSpy)
+    registerPosthook('typeA', postSpy)
+    store.dispatch({ type: 'typeA' })
+
+    expect(prevPreSpy.calledBefore(preSpy)).to.be.true
+    expect(preSpy.calledBefore(nextPreSpy)).to.be.true
+    expect(nextPreSpy.calledBefore(nextPostSpy)).to.be.true
+    expect(nextPostSpy.calledBefore(postSpy)).to.be.true
+    expect(postSpy.calledBefore(prevPostSpy)).to.be.true
+  })
+
+  it('should hook Promise', () => {
 
     // onion struture
     // prevPreSpy↓                             prevPostSpy
