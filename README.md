@@ -44,7 +44,7 @@ registerPrehook('log', (store, action) => {
 store.dispatch({ type: 'log' })
   .then(() => console.log('dispatched and then...'))
   // 'prehooked!'
-  // 'prehooked!'
+  // 'dispatched and then..'
 ```
 
 ## APIs
@@ -53,11 +53,11 @@ store.dispatch({ type: 'log' })
 
 Register a hook for former middleware chain and return uniq id for the hook.
 
-### `registerPosthook(type: string, hook: function)<symbol>`
+### `registerPosthook(type<string>, hook<function>)<symbol>`
 
 Register a hook for later middleware chain and return uniq id for the hook.
 
-### `unregisterHook(id:<symbol>)<void>`
+### `unregisterHook(id<symbol>)<void>`
 
 Unregister the hook with hook id.
 
@@ -72,7 +72,3 @@ $ git clone https://github.com/kamataryo/redux-hook-middleware.git
 $ cd redux-hook-middleware
 $ npm test
 ```
-
-## TODOs
-
-- This middleware is a singleton. A factory is needed in case the dependee has several store.
