@@ -1,0 +1,25 @@
+{
+  "name": "redux-hook-middleware-demo",
+  "version": "0.0.0",
+  "description": "This is a demonstration for redux-hook-middleware",
+  "main": "index.html",
+  "scripts": {
+    "start": "webpack-dev-server  --progress --colors --hot --inline --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-react": "^6.24.1",
+    "immutability-helper": "^2.2.2",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "switz": "^0.0.20"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.0.0",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  }
+}
