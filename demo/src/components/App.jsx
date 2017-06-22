@@ -36,13 +36,12 @@ const reducer = (state = initialState, action) => {
 const middlewares = [hookMiddleware]
 const store = createStore(reducer, initialState, applyMiddleware(...middlewares))
 
-registerPrehook('DELETE_TODO', (store, action, cancel) => {
-  store.dispatch({ type: 'UPDATE_MESSAGE', payload: { message: `Deleting TODO No.${action.payload.index}...` } })
-  // cancel(window.confirm('Are you sure to delete this TODO?'))
+registerPrehook('DELETE_TODO', (store, action) => {
+  store.dispatch({ type: 'UPDATE_MESSAGE', payload: { message: `Deleting TODO No.${action.payload.index + 1}...` } })
 })
 
 registerPosthook('DELETE_TODO', (store, action) => {
-  store.dispatch({ type: 'UPDATE_MESSAGE', payload: { message: `TODO No.${action.payload.index} has been deleted!` } })
+  store.dispatch({ type: 'UPDATE_MESSAGE', payload: { message: `TODO No.${action.payload.index + 1} has been deleted!` } })
 })
 
 registerPosthook('ADD_TODO', (store, action) => {
