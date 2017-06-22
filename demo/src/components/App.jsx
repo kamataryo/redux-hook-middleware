@@ -5,30 +5,36 @@ import hookMiddleware, {
   registerPosthook,
 } from '../../../src'
 import update from 'immutability-helper'
-
 import switz from 'switz'
 
 // redux setup
 const initialTodos = [
   { content: 'Buy 12 eggs' },
   { content: 'Fix car audio' },
-  { content: 'Feed my cat', immortal: true },
+  { content: 'Feed my cat' },
 ]
-const initialState = { todos: initialTodos, message: '' }
+const initialState = { todos: initialTodos, newTodo: '', message: '' }
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action
+  const updateState = updator => update(state, updator)
   return switz(type, s => (
     s
     .case('ADD_TODO', () => {
-      return update(state, { todos : { $push : [ payload.todo ] } })
+      return updateState({
+        todos : { $push : [ payload.todo ] },
+        newTodo: { $set : '' },
+      })
     })
     .case('DELETE_TODO', () => {
       console.log('delete reducer')
-      return update(state, { todos : { $splice : [[payload.index, 1]] } })
+      return updateState( { todos : { $splice : [[payload.index, 1]] } })
     })
     .case('UPDATE_MESSAGE', () => {
-      return update(state, { message : { $set : payload.message } })
+      return updateState( { message : { $set : payload.message } })
+    })
+    .case('UPDATE_NEW_TODO', () => {
+      return updateState({ newTodo: {$set: payload.newTodo } })
     })
     .default(() => state)
   ))
@@ -52,21 +58,26 @@ export default class App extends React.PureComponent {
 
   constructor(prop) {
     super(prop)
-    this.state = { test: '' }
+    this.state = null
   }
 
   render() {
-    console.log(store)
     const { todos, newTodo, message } = store.getState()
-    const { dispatch } = store
+    const dispatch = action => {
+      store.dispatch(action)
+      .then(() => {
+        // force render
+        this.setState({ time: Date.now() })
+      })
+    }
 
     return (
       <main>
-        <h1>hooked todos{ this.state.test }</h1>
+        <h1>hooked todos</h1>
         <ul>
           {
             todos.map((todo, index) => (
-              <li key={ `todo-${todo.content.split(' ').join('-')}` }>
+              <li key={ `todo-${todo.content.split(' ').join('-')}-${index}` }>
                 <span>{ todo.content }</span>
                 <button onClick={ () => dispatch({ type: 'DELETE_TODO', payload: { index } }) }>{ 'delete' }</button>
               </li>
@@ -74,8 +85,13 @@ export default class App extends React.PureComponent {
           }
         </ul>
         <p>
-          <button onClick={ () => dispatch({ type: 'ADD_TODO', payload: { todo: { content: 'aaa' } } }) }>Add</button>
-          <button onClick={ () => this.setState({ test: 'aaa' }) }></button>
+          <input
+            value={ newTodo }
+            type={ 'text' }
+            placeholder={ '(input new todo...)' }
+            onChange={ e => dispatch({ type: 'UPDATE_NEW_TODO', payload: { newTodo: e.target.value }  }) }
+          />
+          <button onClick={ () => dispatch({ type: 'ADD_TODO', payload: { todo: { content: newTodo } } }) }>Add</button>
         </p>
       <section>
         {
