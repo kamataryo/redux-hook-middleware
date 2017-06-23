@@ -65,8 +65,8 @@ describe('middleware', () => {
   it('execute each hooks in order of [pre], next, [post]', () => {
     const store = {}
     // eslint-disable-next-line require-jsdoc
-    const next = sinon.spy()
     const action = { type: 'type' }
+    const next = sinon.stub().returns(action)
 
     const pre1 = sinon.spy()
     const pre2 = sinon.spy()
@@ -76,8 +76,10 @@ describe('middleware', () => {
     registerPrehook('type', pre2)
     registerPosthook('type', post1)
     registerPosthook('type', post2)
-    hookMiddleware(store)(next)(action)
 
+    const result = hookMiddleware(store)(next)(action)
+
+    expect(result).to.equal(action)
     expect(pre1.calledBefore(next)).to.be.true
     expect(pre2.calledBefore(next)).to.be.true
     expect(post1.calledAfter(next)).to.be.true
