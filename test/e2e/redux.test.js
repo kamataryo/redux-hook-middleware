@@ -51,7 +51,8 @@ const store = createStore(
 )
 
 describe('e2e test with redux API', () => {
-  it('should hook', () => {
+
+  it('should hook synchronous', () => {
 
     // onion struture
     // prevPreSpy↓                             prevPostSpy

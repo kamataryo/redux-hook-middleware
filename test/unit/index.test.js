@@ -84,6 +84,5 @@ describe('middleware', () => {
     expect(pre2.calledBefore(next)).to.be.true
     expect(post1.calledAfter(next)).to.be.true
     expect(post2.calledAfter(next)).to.be.true
-
   })
 })
