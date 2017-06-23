@@ -33,18 +33,15 @@ const middlewares = [hookMiddleware]
 const store = createStore(reducer, initialState, applyMiddleware(...middlewares))
 
 // middleware logic
-registerPrehook('log', (store, action) => {
+registerPrehook('HOOKING_ACTION_TYPE', (store, action) => {
   console.log('prehooked!')
+  // do anything inside callback
   // you can also dispatch other actions
-  store.dispatch({ type: 'pre action' })
-  // or do anything inside callback
+  store.dispatch({ type: 'SOME_ACTION_TYPE' })
 })
 
 // how does it works
-store.dispatch({ type: 'log' })
-  .then(() => console.log('dispatched and then...'))
-  // 'prehooked!'
-  // 'dispatched and then..'
+store.dispatch({ type: 'HOOKING_ACTION_TYPE' }) // 'prehooked!'
 ```
 
 ## APIs
