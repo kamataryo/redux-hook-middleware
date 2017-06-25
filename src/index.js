@@ -51,6 +51,20 @@ export const registerPosthook = (type, hook) => {
 }
 
 /**
+ * registerPrehooks
+ * @param  {object} structTypes type: <Array<Function>> or <Function>
+ * @return {object}             ids
+ */
+export const registerPrehooks = structTypes => {
+  Object.keys(structTypes).forEach(type => {
+    const funcs = structTypes[type]
+    if (typeof funcs === '') {
+
+    }
+  })
+}
+
+/**
  * unregister dispatch hook
  * @param  {symbol} id given hook
  * @return {void}
