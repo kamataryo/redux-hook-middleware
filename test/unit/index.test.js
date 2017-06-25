@@ -14,31 +14,33 @@ import hookMiddleware, {
   clearHooks,
   registerPrehook,
   registerPosthook,
+  registerPrehooks,
+  registerPosthooks,
 } from '../../src/index'
 
-describe('registration functions', () => {
+describe('single registration functions', () => {
 
-  it(' should register, unregister and clear a hook / hooks', () => {
-    const id = registerHook('pre', 'have lunch', () => 'wash hands')
-    expect(hooks['have lunch'][0].position).to.equal('pre')
-    expect(hooks['have lunch'][0].hook()).to.equal('wash hands')
+  it(' should register, unregister and clear a hook', () => {
+    const id = registerHook('pre', 'HAVE_LUNCH', () => 'WASH_HANDS')
+    expect(hooks['HAVE_LUNCH'][0].position).to.equal('pre')
+    expect(hooks['HAVE_LUNCH'][0].hook()).to.equal('WASH_HANDS')
     unregisterHook(id)
-    expect(hooks).to.deep.equal({ 'have lunch': [] })
+    expect(hooks).to.deep.equal({ 'HAVE_LUNCH': [] })
     clearHooks()
     expect(hooks).to.deep.equal({})
   })
 
   it('should be a register prehook alias', () => {
-    registerPrehook('have lunch', () => 'wash hands')
-    expect(hooks['have lunch'][0].position).to.equal('pre')
-    expect(hooks['have lunch'][0].hook()).to.equal('wash hands')
+    registerPrehook('HAVE_LUNCH', () => 'WASH_HANDS')
+    expect(hooks['HAVE_LUNCH'][0].position).to.equal('pre')
+    expect(hooks['HAVE_LUNCH'][0].hook()).to.equal('WASH_HANDS')
     clearHooks()
   })
 
-  it('should be a register pposthook alias', () => {
-    registerPosthook('have dinner', () => 'have digestif')
-    expect(hooks['have dinner'][0].position).to.equal('post')
-    expect(hooks['have dinner'][0].hook()).to.equal('have digestif')
+  it('should be a register posthook alias', () => {
+    registerPosthook('HAVE_DINNER', () => 'HAVE_DRINK')
+    expect(hooks['HAVE_DINNER'][0].position).to.equal('post')
+    expect(hooks['HAVE_DINNER'][0].hook()).to.equal('HAVE_DRINK')
     clearHooks()
   })
 
@@ -46,6 +48,45 @@ describe('registration functions', () => {
     expect(registerHook(undefined)).to.be.false
     expect(registerHook('pre', undefined)).to.be.false
     expect(registerHook('pre', 'type', undefined)).to.be.false
+  })
+})
+
+describe('multiple reistration function', () => {
+
+  it(' should register, unregister and clear prehooks', () => {
+    const ids = registerPrehooks({
+      HAVE_LUNCH : [
+        () => 'CHOP_VEGE',
+        () => 'BOIL_WATER',
+      ],
+      HAVE_DINNER : () => 'PREPARE_DRINK',
+    })
+    expect(hooks['HAVE_LUNCH'][0].position).to.equal('pre')
+    expect(hooks['HAVE_LUNCH'][1].position).to.equal('pre')
+    expect(hooks['HAVE_DINNER'][0].position).to.equal('pre')
+
+    expect(ids.HAVE_LUNCH).to.have.length(2)
+    expect(ids.HAVE_DINNER).to.have.length(1)
+    clearHooks()
+    expect(hooks).to.deep.equal({})
+  })
+
+  it(' should register, unregister and clear posthooks', () => {
+    const ids = registerPosthooks({
+      HAVE_LUNCH : [
+        () => 'CHOP_VEGE',
+        () => 'BOIL_WATER',
+      ],
+      HAVE_DINNER : () => 'PREPARE_DRINK',
+    })
+    expect(hooks['HAVE_LUNCH'][0].position).to.equal('post')
+    expect(hooks['HAVE_LUNCH'][1].position).to.equal('post')
+    expect(hooks['HAVE_DINNER'][0].position).to.equal('post')
+
+    expect(ids.HAVE_LUNCH).to.have.length(2)
+    expect(ids.HAVE_DINNER).to.have.length(1)
+    clearHooks()
+    expect(hooks).to.deep.equal({})
   })
 })
 
