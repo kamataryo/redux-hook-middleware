@@ -52,18 +52,53 @@ export const registerPosthook = (type, hook) => {
 
 /**
  * registerPrehooks
+ * @param  {'pre'|'post'} position define pre or post hook
+ * @param  {object} structTypes type: <Array<Function>> or <Function>
+ * @return {object}             ids
+ */
+export const registerHooks = (position, structTypes) => {
+
+  if (typeof position !== 'string') {
+    return false
+  }
+  if (typeof structTypes !== 'object') {
+    return false
+  }
+
+  const result = {}
+
+  Object.keys(structTypes).forEach(type => {
+    const hooks = structTypes[type]
+    if (typeof hooks === 'function') {
+      result[type] = [registerHook(position, type, hooks)]
+    } else if (Array.isArray(hooks)) {
+      result[type] = hooks.map(hook => (typeof hook === 'function') ?
+        registerHook(position, type, hook) : undefined)
+    } else {
+      result[type] = undefined
+    }
+  })
+
+  return result
+}
+
+/**
+ * register Prehooks
  * @param  {object} structTypes type: <Array<Function>> or <Function>
  * @return {object}             ids
  */
 export const registerPrehooks = structTypes => {
-  Object.keys(structTypes).forEach(type => {
-    const funcs = structTypes[type]
-    if (typeof funcs === '') {
-
-    }
-  })
+  return registerHooks('pre', structTypes)
 }
 
+/**
+ * register Prehooks
+ * @param  {object} structTypes type: <Array<Function>> or <Function>
+ * @return {object}             ids
+ */
+export const registerPosthooks = structTypes => {
+  return registerHooks('post', structTypes)
+}
 /**
  * unregister dispatch hook
  * @param  {symbol} id given hook
