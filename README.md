@@ -54,6 +54,16 @@ Register a hook for former middleware chain and return uniq id for the hook.
 
 Register a hook for later middleware chain and return uniq id for the hook.
 
+### `registerPrehooks(hookObject<object>)<object>`
+
+Register hooks for former middleware chain and return uniq id for the hook.
+Pass an action type as key and a callback or an array of callbacks as value.
+
+### `registerPosthooks(hookObject<object>)<onject>`
+
+Register hooks for later middleware chain and return uniq id for the hook.
+Pass an action type as key and a callback or an array of callbacks as value.
+
 ### `unregisterHook(id<symbol>)<void>`
 
 Unregister the hook with hook id.
