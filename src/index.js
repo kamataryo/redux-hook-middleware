@@ -73,9 +73,9 @@ export const registerHooks = (position, structTypes) => {
       result[type] = [registerHook(position, type, hooks)]
     } else if (Array.isArray(hooks)) {
       result[type] = hooks.map(hook => (typeof hook === 'function') ?
-        registerHook(position, type, hook) : undefined)
+        registerHook(position, type, hook) : void 0)
     } else {
-      result[type] = undefined
+      result[type] = void 0
     }
   })
 
