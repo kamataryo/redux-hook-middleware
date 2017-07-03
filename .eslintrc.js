@@ -26,18 +26,20 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed'],
     'arrow-spacing': ['error', { 'before': true, 'after': true }],
     'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
+    'comma-dangle': ['error', 'only-multiline'],
     'comma-spacing': ['error', { 'before': false, 'after': true }],
     'indent': ['error', 2, { 'SwitchCase': 1 }],
     'jsx-quotes': ['error', 'prefer-double'],
-    'valid-jsdoc': ['error'],
     'key-spacing': ['off'],
     'keyword-spacing': ['error'],
     'linebreak-style': ['error', 'unix'],
-    'no-dupe-args': ['error'],
     'no-console': ['warn'],
     'no-const-assign': ['error'],
+    'no-dupe-args': ['error'],
+    'no-undefined' : ['error'],
     'no-unused-vars': ['warn'],
     'object-curly-spacing': ['error', 'always'],
+    'quotes': ['error', 'single'],
     'require-jsdoc': ['error', {
       'require': {
         'ArrowFunctionExpression': true,
@@ -46,7 +48,7 @@ module.exports = {
         'MethodDefinition': true
       }
     }],
-    'quotes': ['error', 'single'],
+    'valid-jsdoc': ['error'],
     'semi': ['error', 'never'],
     'spaced-comment': [
       'error',
