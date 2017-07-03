@@ -1,32 +1,32 @@
 module.exports = {
-  'env': {
-    'browser'  : true,
-    'commonjs' : true,
-    'es6'      : true,
-    'mocha'    : true,
-    'node'     : true
+  env: {
+    browser  : true,
+    commonjs : true,
+    es6      : true,
+    mocha    : true,
+    node     : true
   },
-  'plugins': [
+  plugins: [
     'import',
   ],
-  'extends': [
+  extends: [
     'eslint:recommended',
     'plugin:import/errors',
   ],
-  'parser': 'babel-eslint',
-  'parserOptions': {
-    'ecmaVersion': 2017,
-    'sourceType': 'module',
-    'ecmaFeatures': {
-      'experimentalObjectRestSpread': true,
-      'jsx': false
+  parser: 'babel-eslint',
+  parserOptions: {
+    ecmaVersion: 2017,
+    sourceType: 'module',
+    ecmaFeatures: {
+      experimentalObjectRestSpread: true,
+      jsx: false
     }
   },
   'rules': {
     'arrow-parens': ['error', 'as-needed'],
     'arrow-spacing': ['error', { 'before': true, 'after': true }],
     'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
-    'comma-dangle': ['error', 'only-multiline'],
+    'comma-dangle': ['error', 'always-multiline'],
     'comma-spacing': ['error', { 'before': false, 'after': true }],
     'indent': ['error', 2, { 'SwitchCase': 1 }],
     'jsx-quotes': ['error', 'prefer-double'],

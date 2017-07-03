@@ -46,9 +46,9 @@ describe('single registration functions', () => {
   })
 
   it('should fail with invalid arguments', () => {
-    expect(registerHook(undefined)).to.be.false
-    expect(registerHook('pre', undefined)).to.be.false
-    expect(registerHook('pre', 'type', undefined)).to.be.false
+    expect(registerHook(void 0)).to.be.false
+    expect(registerHook('pre', void 0)).to.be.false
+    expect(registerHook('pre', 'type', void 0)).to.be.false
   })
 })
 
@@ -87,8 +87,8 @@ describe('multiple reistration function', () => {
   })
 
   it('should fail with invalid arguments', () => {
-    expect(registerHooks(undefined)).to.be.false
-    expect(registerHooks('pre', undefined)).to.be.false
+    expect(registerHooks(void 0)).to.be.false
+    expect(registerHooks('pre', void 0)).to.be.false
   })
 })
 
