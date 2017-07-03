@@ -18,8 +18,8 @@ const reducer = (state = { case: '' }, action) => {
 }
 
 const middlewares = [
+  // hookMiddleware,
   thunkMiddleWare,
-  hookMiddleware,
 ]
 
 const store = createStore(
@@ -30,9 +30,36 @@ const store = createStore(
 
 describe('e2e test with redux-thunk API', () => {
 
-  it('should be thenable', () => {
+  it.only('should be thenable', () => {
 
-    expect(typeof store.dispatch({ type: 'typeA' }).then).to.equal('function')
+    const mockAPIAccess = new Promise(resolve => {
+      setTimeout(resolve, 100)
+    })
+
+    // eslint-disable-next-line require-jsdoc
+    const createThunkAction = () => {
+
+      return dispatch => {
+        // Reducers may handle this to set a flag like isFetching
+        dispatch({ type: 'GET_USER_REQUEST' })
+
+        // Perform the actual API call
+        return mockAPIAccess().then(
+          response => {
+            // Reducers may handle this to show the data and reset isFetching
+            dispatch({ type: 'GET_USER_SUCCESS',  response })
+          },
+          error => {
+            // Reducers may handle this to reset isFetching
+            dispatch({ type: 'GET_USER_FAILURE',  error })
+            // Rethrow so returned Promise is rejected
+            throw error
+          }
+        )
+      }
+    }
+
+    expect(typeof store.dispatch(createThunkAction).then).to.equal('function')
 
   })
 })
