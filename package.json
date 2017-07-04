@@ -12,11 +12,11 @@
     "test": "cross-env NODE_ENV=test mocha",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "lint": "eslint --cache --ext=jsx --ext=js .",
-    "encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
-    "deploy_keygen": "ssh-keygen -t rsa -b 4096 -C \"$(git config user.email)\" -f ./.travis_rsa -N ''",
-    "encrypt_deploy_key": "travis encrypt-file ./.travis_rsa --add",
     "preversion": "npm run lint && npm test && git fetch",
-    "postversion": "git push origin master && git push origin $(git describe --abbrev=0 --tags)"
+    "postversion": "git push origin master && git push origin $(git describe --abbrev=0 --tags)",
+    "__encrypt_npm_accesstoken": "travis encrypt $([[ $(cat ~/.npmrc) =~ _authToken=(.*)$ ]] && echo ${BASH_REMATCH[1]}) --add deploy.api_key",
+    "__deploykey_gen": "ssh-keygen -t rsa -b 4096 -C \"$(git config user.email)\" -f ./.travis_rsa -N ''",
+    "__encrypt_deploykey": "travis encrypt-file ./.travis_rsa --add"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
