@@ -774,8 +774,8 @@ camelcase@^4.1.0:
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
 caniuse-lite@^1.0.30000701:
-  version "1.0.30000703"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000703.tgz#666e8c3f1e4f7abb1d16d48e04e7e9e8df934925"
+  version "1.0.30000704"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000704.tgz#adb6ea01134515663682db93abab291d4c02946b"
 
 caseless@~0.12.0:
   version "0.12.0"
